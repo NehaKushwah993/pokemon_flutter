@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pokemon_flutter/screens/pokemon_list/bloc/pokemon_list_bloc.dart';
 
 import 'screens/pokemon_detail/pokemon_detail_screen.dart';
 import 'screens/pokemon_list/pokemon_list_screen.dart';
@@ -24,7 +26,9 @@ class MyApp extends StatelessWidget {
         GoRoute(
             path: "/",
             builder: (ctx, state) {
-              return const PokemonListScreen();
+              return BlocProvider(
+                  create: (context) => PokemonListBloc(),
+                  child: const PokemonListScreen());
             }),
         GoRoute(
             path: "/detail",
