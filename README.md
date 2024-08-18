@@ -1,16 +1,31 @@
 # pokemon_flutter
 
-A new Flutter project.
+Flutter project to display list of pokemons and theri detail.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+**Features**
 
-A few resources to get you started if this is your first Flutter project:
+- Displays list of Pokemon
+- Pokemon details page
+- Pull to refresh
+- Pagination (Infinite scroll up to 300 Pokemon)
+- DarkTheme support (TODO)
+- Search pokeom from localDB and Remote Server (TODO)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**TechStack used :**
+
+- Flutter, Dart
+- Go_router library
+- Bloc + Repository structure
+- Stream 
+- Dependency Inject (custom) 
+- SwipeRefreshLayout (Pull to refresh a view with data)
+- GridView
+- Http library
+
+
+https://github.com/user-attachments/assets/b812ffe8-d731-41db-a088-2cd2cf1df7ab
+
+
+  
