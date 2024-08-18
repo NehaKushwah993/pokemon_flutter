@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pokemon_flutter/routes/routes_instance.dart';
@@ -33,7 +34,7 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
 
   void _scrollListener() {
     if (_scrollController.position.pixels ==
-        _scrollController.position.maxScrollExtent) {
+        _scrollController.position.maxScrollExtent - 100) {
       final currentState = _bloc.state;
 
       if (currentState is PokemonListStateLoaded && !_isFetchingMore) {
@@ -58,40 +59,74 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
         builder: (context, state) {
           final pokemonList = _bloc.pokemonList;
 
-          if (pokemonList.isEmpty && state is PokemonListStateLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
+          bool showBlankView =
+              pokemonList.isEmpty && state is PokemonListStateLoaded;
 
-          return GridView.builder(
-            controller: _scrollController,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, // Number of items per row
-              crossAxisSpacing: 8.0, // Space between columns
-              mainAxisSpacing: 8.0, // Space between rows
-              childAspectRatio: 1, // Aspect ratio of each item
-            ),
-            padding: const EdgeInsets.all(8.0),
-            itemCount: pokemonList.length + (_isFetchingMore ? 1 : 0),
-            itemBuilder: (context, index) {
-              if (index >= pokemonList.length) {
-                return const Center(child: CircularProgressIndicator());
-              }
+          return RefreshIndicator(
+            onRefresh: _onRefresh,
+            child: showBlankView
+                ? blankDummyScrollableView()
+                : pokemonList.isEmpty
+                    ? const Center(child: CircularProgressIndicator())
+                    : GridView.builder(
+                        controller: _scrollController,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, // Number of items per row
+                          crossAxisSpacing: 8.0, // Space between columns
+                          mainAxisSpacing: 8.0, // Space between rows
+                          childAspectRatio: 1, // Aspect ratio of each item
+                        ),
+                        padding: const EdgeInsets.all(8.0),
+                        itemCount:
+                            pokemonList.length + (_isFetchingMore ? 1 : 0),
+                        itemBuilder: (context, index) {
+                          // Show loading at center for initial load
+                          if (index >= pokemonList.length) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
 
-              final item = pokemonList[index];
-              return GridTile(
-                child: PokemonListItemWidget(
-                  item,
-                  onTap: () {
-                    final String route = detailRoute.path.replaceFirst(
-                        ':id', extractPokemonId(pokemonList[index].url));
-                    context.push(route);
-                  },
-                ),
-              );
-            },
+                          final item = pokemonList[index];
+                          return GridTile(
+                            child: PokemonListItemWidget(
+                              item,
+                              onTap: () {
+                                final String route = detailRoute.path
+                                    .replaceFirst(
+                                        ':id',
+                                        extractPokemonId(
+                                            pokemonList[index].url));
+                                context.push(route);
+                              },
+                            ),
+                          );
+                        },
+                      ),
           );
         },
       ),
+    );
+  }
+
+  Future<void> _onRefresh() async {
+    // Dispatch a refresh event to the BLoC
+    _bloc.hasReachedMax = false;
+    _bloc.pokemonList = [];
+    _bloc.add(PokemonListEventFetch());
+  }
+
+  blankDummyScrollableView() {
+    return Expanded(
+      child: ListView(children: [
+        Container(
+          color: Colors.transparent,
+          height: 100,
+          child: const Center(
+            child: Text('No Pokémon available.'),
+          ),
+        ),
+      ]),
     );
   }
 }
