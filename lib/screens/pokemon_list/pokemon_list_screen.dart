@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pokemon_flutter/routes/routes_instance.dart';
 import 'package:pokemon_flutter/screens/pokemon_list/pokemon_list.dart';
 import 'package:pokemon_flutter/screens/widgets/pokemon_list_item_widget.dart';
+import 'package:pokemon_flutter/utils/url_utils.dart';
 
 class PokemonListScreen extends StatefulWidget {
   const PokemonListScreen({super.key});
@@ -16,9 +18,9 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
 
   @override
   void initState() {
+    super.initState();
     _bloc = context.read<PokemonListBloc>();
     _bloc.add(PokemonListEventInit());
-    super.initState();
   }
 
   @override
@@ -44,7 +46,9 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
                 child: PokemonListItemWidget(
                   item,
                   onTap: () {
-                    context.go("/detail");
+                    final String route = detailRoute.path.replaceFirst(
+                        ':id', extractPokemonId(_bloc.pokemonList[index].url));
+                    context.push(route);
                   },
                 ),
               );

@@ -14,9 +14,8 @@ class PokemonRepositoriesImpl extends PokemonRepositories {
   }
 
   @override
-  Future<PokemonModel> fetchPokemonDetails(String name) {
-    // TODO: implement fetchPokemonDetails
-    return Future.delayed(Duration.zero);
+  Future<PokemonModel> fetchPokemonDetails(String id) {
+    return remote.fetchPokemonDetail(id: id);
   }
 
   @override

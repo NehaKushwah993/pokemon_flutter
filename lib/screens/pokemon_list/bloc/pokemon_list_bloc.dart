@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokemon_flutter/models/pokemon_model.dart';
 import 'package:pokemon_flutter/models/pokemon_name_url_model.dart';
 import 'package:pokemon_flutter/remote/config.dart';
 import 'package:pokemon_flutter/remote/pokemon_remote_data_source.dart';
