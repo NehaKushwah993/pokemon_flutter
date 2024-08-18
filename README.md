@@ -17,6 +17,7 @@ Flutter project to display list of pokemons and theri detail.
 
 - Flutter, Dart
 - Go_router library
+- Hive (offline loading)
 - Bloc + Repository structure
 - Stream 
 - Dependency Inject (custom) 
