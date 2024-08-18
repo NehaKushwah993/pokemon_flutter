@@ -11,9 +11,9 @@ class PokemonRemoteDataSource {
   PokemonRemoteDataSource(this.baseUrl);
 
   Future<List<PokemonNameUrlModel>> fetchPokemonList(
-      {required int offset, required int size}) async {
-    Response response =
-        await http.get(Uri.parse("$baseUrl/pokemon?offset=$offset&size=$size"));
+      {required int offset, required int limit}) async {
+    Response response = await http
+        .get(Uri.parse("$baseUrl/pokemon?offset=$offset&limit=$limit"));
 
     if (response.statusCode < 200 || response.statusCode > 299) {
       throw Exception("Failed to load pokemons");

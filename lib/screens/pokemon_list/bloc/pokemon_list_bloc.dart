@@ -9,24 +9,35 @@ import 'pokemon_list_bloc_event.dart';
 import 'pokemon_list_bloc_state.dart';
 
 class PokemonListBloc extends Bloc<PokemonListBlocEvent, PokemonListBlocState> {
+  static const int _limit = 20; // Number of items per page
+
+  List<PokemonNameUrlModel> pokemonList = [];
+  bool hasReachedMax = false;
+
   PokemonRepositories repositories =
       PokemonRepositoriesImpl(PokemonRemoteDataSource(Config.instance.baseUrl));
 
-  List<PokemonNameUrlModel> pokemonList = [];
-
-  PokemonListBloc() : super(PokemonListStateUpdate()) {
-    on<PokemonListEventInit>(fetchInitialPokemonList);
+  PokemonListBloc() : super(PokemonListStateInit()) {
+    on<PokemonListEventFetch>(fetchPokemonList);
   }
 
-  Future<void> fetchInitialPokemonList(
-    PokemonListBlocEvent event,
+  Future<void> fetchPokemonList(
+    PokemonListEventFetch event,
     Emitter<PokemonListBlocState> emit,
   ) async {
+    emit(PokemonListStateLoading());
     try {
-      pokemonList = await repositories.fetchPokemonList(0, 0);
+      final List<PokemonNameUrlModel> newPokemons =
+          await repositories.fetchPokemonList(pokemonList.length, _limit);
+      hasReachedMax = newPokemons.length < _limit;
+
+      pokemonList.addAll(newPokemons);
+
+      emit(
+        PokemonListStateLoaded(),
+      );
     } catch (e) {
-      print(e);
+      emit(PokemonListStateError("error"));
     }
-    emit(PokemonListStateUpdate());
   }
 }

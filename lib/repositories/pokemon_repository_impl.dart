@@ -19,7 +19,7 @@ class PokemonRepositoriesImpl extends PokemonRepositories {
   }
 
   @override
-  Future<List<PokemonNameUrlModel>> fetchPokemonList(int offset, int size) {
-    return remote.fetchPokemonList(offset: offset, size: size);
+  Future<List<PokemonNameUrlModel>> fetchPokemonList(int offset, int limit) {
+    return remote.fetchPokemonList(offset: offset, limit: limit);
   }
 }

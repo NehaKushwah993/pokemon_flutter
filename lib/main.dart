@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pokemon_flutter/remote/config.dart';
 import 'package:pokemon_flutter/routes/routes_instance.dart';
 
