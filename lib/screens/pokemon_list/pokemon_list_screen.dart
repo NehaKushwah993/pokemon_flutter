@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pokemon_flutter/screens/pokemon_list/bloc/pokemon_list_bloc.dart';
-import 'package:pokemon_flutter/screens/pokemon_list/bloc/pokemon_list_bloc_event.dart';
-import 'package:pokemon_flutter/screens/pokemon_list/bloc/pokemon_list_bloc_state.dart';
+import 'package:pokemon_flutter/screens/pokemon_list/pokemon_list.dart';
+import 'package:pokemon_flutter/screens/widgets/pokemon_list_item_widget.dart';
 
 class PokemonListScreen extends StatefulWidget {
   const PokemonListScreen({super.key});
@@ -30,13 +29,26 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
       ),
       body: BlocBuilder<PokemonListBloc, PokemonListBlocState>(
         builder: (context, state) {
-          return Center(
-            child: GestureDetector(
-              onTap: () {
-                context.push("/detail");
-              },
-              child: const Text("click here"),
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // Number of items per row
+              crossAxisSpacing: 8.0, // Space between columns
+              mainAxisSpacing: 8.0, // Space between rows
+              childAspectRatio: 1, // Aspect ratio of each item
             ),
+            padding: const EdgeInsets.all(8.0),
+            itemCount: _bloc.pokemonList.length,
+            itemBuilder: (context, index) {
+              final item = _bloc.pokemonList[index];
+              return GridTile(
+                child: PokemonListItemWidget(
+                  item,
+                  onTap: () {
+                    context.go("/detail");
+                  },
+                ),
+              );
+            },
           );
         },
       ),

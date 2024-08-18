@@ -11,4 +11,8 @@ class Config {
   init(String baseUrl) {
     this.baseUrl = baseUrl;
   }
+
+  String getImageUrl(String id) {
+    return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png";
+  }
 }
