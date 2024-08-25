@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pokemon_flutter/models/pokemon_model.dart';
 import 'package:pokemon_flutter/models/pokemon_name_url_model.dart';
 import 'package:pokemon_flutter/remote/config.dart';
 import 'package:pokemon_flutter/routes/routes_instance.dart';
@@ -16,9 +16,11 @@ void main() async {
   final appDocumentDir = await getApplicationDocumentsDirectory();
   await Hive.initFlutter(appDocumentDir.path);
   Hive.registerAdapter(PokemonNameUrlModelAdapter());
+  Hive.registerAdapter(PokemonModelAdapter());
 
   // Open a Hive box
   await Hive.openBox(pokemonListBox);
+  await Hive.openBox(pokemonDetailBox);
 
   runApp(const MyApp());
 }
