@@ -18,13 +18,17 @@ class PokemonListItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            child: CachedNetworkImage(
-              imageUrl: Config.instance.getImageUrl(extractPokemonId(item.url)),
-              fit: BoxFit.contain,
-              width: double.infinity,
-              errorWidget: (context, url, error) {
-                return Container();
-              },
+            child: Hero(
+              tag: "hero-${extractPokemonId(item.url)}",
+              child: CachedNetworkImage(
+                imageUrl:
+                    Config.instance.getImageUrl(extractPokemonId(item.url)),
+                fit: BoxFit.contain,
+                width: double.infinity,
+                errorWidget: (context, url, error) {
+                  return Container();
+                },
+              ),
             ),
           ),
           const SizedBox(height: 8.0),

@@ -48,12 +48,15 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CachedNetworkImage(
-                    imageUrl:
-                        Config.instance.getImageUrl((_bloc.id).toString()),
-                    fit: BoxFit.contain,
-                    width: double.infinity,
-                    errorWidget: (context, url, error) => Container(),
+                  Hero(
+                    tag: "hero-${_bloc.id}",
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          Config.instance.getImageUrl((_bloc.id).toString()),
+                      fit: BoxFit.contain,
+                      width: double.infinity,
+                      errorWidget: (context, url, error) => Container(),
+                    ),
                   ),
                   TitleAndDetailWidget("Base Experience",
                       "${pokemon?.baseExperience ?? "-"} Exp. points"),

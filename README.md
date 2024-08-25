@@ -6,6 +6,7 @@ Flutter project to display list of pokemons and theri detail.
 **Features**
 
 - Displays list of Pokemon
+- Offline loading of list + details + images
 - Pokemon details page
 - Pull to refresh
 - Pagination (Infinite scroll up to 300 Pokemon)
@@ -25,8 +26,11 @@ Flutter project to display list of pokemons and theri detail.
 - GridView
 - Http library
 
+https://github.com/user-attachments/assets/39156792-cce5-4b62-8bd2-6f8e7731edab
 
-https://github.com/user-attachments/assets/b812ffe8-d731-41db-a088-2cd2cf1df7ab
+
+
+
 
 
   
