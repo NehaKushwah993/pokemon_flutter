@@ -57,7 +57,8 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
       ),
       body: BlocConsumer<PokemonListBloc, PokemonListBlocState>(
         listener: (context, state) {
-          if (state is PokemonListStateLoaded) {
+          if (state is PokemonListStateLoaded ||
+              state is PokemonListStateError) {
             _isFetchingMore = false;
           }
         },
@@ -66,6 +67,8 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
             valueListenable: _pokemonBox.listenable(),
             builder: (context, Box box, _) {
               final pokemonList = box.values.toList();
+
+              print("size ${pokemonList.length}");
 
               bool showBlankView =
                   pokemonList.isEmpty && state is PokemonListStateLoaded;
