@@ -68,6 +68,8 @@ class _PokemonListScreenState extends State<PokemonListScreen> {
             builder: (context, Box box, _) {
               final pokemonList = box.values.toList();
 
+              print("size ${pokemonList.length}");
+
               bool showBlankView =
                   pokemonList.isEmpty && state is PokemonListStateLoaded;
 
