@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pokemon_flutter/routes/routes_instance.dart';
 import 'package:pokemon_flutter/screens/pokemon_list/pokemon_list.dart';

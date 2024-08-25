@@ -44,7 +44,7 @@ class PokemonListBloc extends Bloc<PokemonListBlocEvent, PokemonListBlocState> {
     }
   }
 
-  Future<void> saveDataToHive(List<PokemonNameUrlModel> newPokemons) async {
+  saveDataToHive(List<PokemonNameUrlModel> newPokemons) async {
     var box = Hive.box(pokemonListBox);
     for (var pokemon in newPokemons) {
       await box.add(pokemon);

@@ -9,7 +9,7 @@ class PokemonRepositoriesImpl extends PokemonRepositories {
 
   @override
   Future<List<PokemonNameUrlModel>> fetchPokemonByName(String name) {
-    // TODO: implement fetchPokemonDetails
+    // TODO: implement fetchPokemonByName
     return Future.delayed(Duration.zero);
   }
 
