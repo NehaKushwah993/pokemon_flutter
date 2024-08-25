@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -47,10 +48,12 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.network(
-                    Config.instance.getImageUrl((_bloc.id).toString()),
-                    fit: BoxFit.cover,
+                  CachedNetworkImage(
+                    imageUrl:
+                        Config.instance.getImageUrl((_bloc.id).toString()),
+                    fit: BoxFit.contain,
                     width: double.infinity,
+                    errorWidget: (context, url, error) => Container(),
                   ),
                   TitleAndDetailWidget("Base Experience",
                       "${pokemon?.baseExperience ?? "-"} Exp. points"),

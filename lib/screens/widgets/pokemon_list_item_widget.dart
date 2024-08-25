@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pokemon_flutter/remote/config.dart';
 import 'package:pokemon_flutter/utils/url_utils.dart';
@@ -17,10 +18,13 @@ class PokemonListItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            child: Image.network(
-              Config.instance.getImageUrl(extractPokemonId(item.url)),
-              fit: BoxFit.cover,
+            child: CachedNetworkImage(
+              imageUrl: Config.instance.getImageUrl(extractPokemonId(item.url)),
+              fit: BoxFit.contain,
               width: double.infinity,
+              errorWidget: (context, url, error) {
+                return Container();
+              },
             ),
           ),
           const SizedBox(height: 8.0),
