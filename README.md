@@ -29,6 +29,14 @@ Flutter project to display list of pokemons and theri detail.
 https://github.com/user-attachments/assets/39156792-cce5-4b62-8bd2-6f8e7731edab
 
 
+Searches : 
+list of item flutter app
+bloc architecture flutter
+bloc flutter sample app
+list of pokemons flutter
+pokemon in flutter
+
+
 
 
 
