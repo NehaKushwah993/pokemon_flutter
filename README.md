@@ -1,30 +1,30 @@
 # pokemon_flutter
 
-Flutter project to display list of pokemons and theri detail.
+A Flutter project to display a list of Pokémon and their details.
 
+## Features
 
-**Features**
+- **Displays list of Pokémon**
+- **Offline loading** of Pokémon list, details, and images
+- **Pokémon details page** with comprehensive information
+- **Pull to refresh** for updating the Pokémon list
+- **Pagination** (infinite scroll up to 300 Pokémon)
+- **Dark Theme support** (TODO)
+- **Search Pokémon** from local database and remote server (TODO)
 
-- Displays list of Pokemon
-- Offline loading of list + details + images
-- Pokemon details page
-- Pull to refresh
-- Pagination (Infinite scroll up to 300 Pokemon)
-- DarkTheme support (TODO)
-- Search pokeom from localDB and Remote Server (TODO)
+## Tech Stack
 
+- **Flutter** and **Dart**
+- **GoRouter** for navigation
+- **Hive** for offline data storage
+- **Bloc + Repository** pattern for state management
+- **Stream** for asynchronous data handling
+- **Custom Dependency Injection**
+- **SwipeRefreshLayout** for pull-to-refresh functionality
+- **GridView** for displaying Pokémon in a grid layout
+- **Http** library for API communication
 
-**TechStack used :**
-
-- Flutter, Dart
-- Go_router library
-- Hive (offline loading)
-- Bloc + Repository structure
-- Stream 
-- Dependency Inject (custom) 
-- SwipeRefreshLayout (Pull to refresh a view with data)
-- GridView
-- Http library
+---
 
 https://github.com/user-attachments/assets/39156792-cce5-4b62-8bd2-6f8e7731edab
 
